@@ -29,20 +29,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // 7. Habilitamos el cors para el intercambio de recursos entre dominios web.
 app.use(cors());
 
-// 9. Configuramos multer para manejar los datos del formulario que se envían a través de solicitudes HTTP con cabeceras
-// enctype de multipart/form-data, es decir, para subir archivos.
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, `src/uploads`);
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + '-' + file.originalname);
-  }
-});
-
-// 10. creamos un objeto multer para guardar los archivos
-const upload = multer({ storage });
-
 //Get users
 app.get('/api/users', async(req,res)=>{
   const users = await User.find();
