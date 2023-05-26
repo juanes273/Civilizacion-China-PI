@@ -15,7 +15,7 @@ const cors = require('cors');
 const multer = require('multer');
 
 // 11. requerimos nuestro modelo que mapeara la BD
-const Model = require('./model/Model');
+const User = require('./model/Model');
 
 // 3. Configuramos la conexion a mongodb con mongoose
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -80,7 +80,7 @@ app.get('/api/models/:id', (req, res) => {
 
 //Get users
 app.get('/api/users', async(req,res)=>{
-  const users = await Model.find();
+  const users = await User.find();
   res.send(users)
 })
 
