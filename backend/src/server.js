@@ -43,41 +43,6 @@ const storage = multer.diskStorage({
 // 10. creamos un objeto multer para guardar los archivos
 const upload = multer({ storage });
 
-// 12. API Post
-app.post('/api/models', upload.single('model'), (req, res) => {
-  // 13. Creamos un nuevo modelo de nuestro esquema
-  const newModel = new Model({
-    name: req.body.name,
-    model: req.file.path
-  });
-
-  // 14. Lo guardamos en la DB
-  newModel.save()
-    .then(model => {
-      console.log('Model saved:', model);
-      res.json(model);
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({ error: 'Unable to save model' });
-    });
-});
-
-// 15. API get
-app.get('/api/models/:id', (req, res) => {
-  const id = req.params.id;
-  Model.findById(id)
-    .then(model => {
-      const modelPath = model.model;
-      const filePath = `${process.cwd()}/${modelPath}`;
-      res.sendFile(filePath);
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({ error: 'Unable to get model' });
-    });
-});
-
 //Get users
 app.get('/api/users', async(req,res)=>{
   const users = await User.find();
