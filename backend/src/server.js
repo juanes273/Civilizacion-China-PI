@@ -4,7 +4,7 @@ const port = 5000;
 
 
 // 1. agregamos la uri de la base de datos
-const uri = "mongodb://0.0.0.0:27017/Civilizaciones";
+const uri = "mongodb+srv://brandjuan:nDV1dZYmQCH7bbq4@civilizacion-china.p8tyooj.mongodb.net/CivilizacionesDB";
 // 2. instalamos npm i mongoose@6.0.11
 const mongoose = require('mongoose');
 // 5. instalamos bodyParser
