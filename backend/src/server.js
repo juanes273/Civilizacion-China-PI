@@ -35,4 +35,7 @@ app.get('/api/users', async(req,res)=>{
   res.send(users)
 })
 
+
 app.listen(port, () => console.log(`Server running on port ${port}`));
+
+export default app;
