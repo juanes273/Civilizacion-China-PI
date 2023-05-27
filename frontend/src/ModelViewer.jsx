@@ -9,21 +9,36 @@ export default function ModelViewer(props) {
     baseURL: 'https://civilizacion-china-pi.vercel.app/'
   });
 
-  useEffect(() => { 
-    const getModel = async () => {
-      const res = await instance.get(`/api/models/${props.id}`, { responseType: 'blob' });
-      console.log(res.data);
-      const blob = new Blob([res.data], { type: 'model/gltf+json' });
-      const url = URL.createObjectURL(blob);
-      setModel(url);
-    };
-    getModel();
-  }, [props.id]);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await instance.post('/api/users', { email, password });
+      setMessage(response.data.message);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  return <>
-    {model && <Experience model={model} />}
-  </>
-
-
+  return (
+    <div>
+      <h1>Login Page</h1>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="email"
+          placeholder="Correo electrónico"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Contraseña"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button type="submit">Iniciar sesión</button>
+      </form>
+      <p>{message}</p>
+    </div>
+  );
 }
 
